@@ -13,7 +13,7 @@ class Docker implements Serializable {
         script.echo 'building the image....'
         script.withCredentials([script.usernamePassword(credentialsId: 'nexus-login-credentials', passwordVariable: 'PASS', usernameVariable: 'USER')]){
             script.sh "docker build -t $imageName ."
-            script.sh 'echo $script.PASS | docker login -u $script.USER --password-stdin 64.227.176.229:8083'
+            script.sh 'echo $PASS | docker login -u $USER --password-stdin 64.227.176.229:8083'
             script.sh "docker push $imageName"
         }
     }
